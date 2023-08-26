@@ -12,7 +12,13 @@ Since the idea of having a vpn connection would be to safeguard personal data, t
 
 ## usage
 
-[ BACKUP_SSH=12345 ] WG_HOST=some.dynamic.host WG_PORT=12345 ./fw.sh
+Clone the repo, and copy the contents to `/root`. 
+
+Add the following to the root users crontab by running `sudo crontab -e`:
+```
+* *  * * *     WG_HOST=some.dynamic.host WG_PORT=12345 /root/wg-proxy/fw.sh
+@reboot        SSH_IP=x.x.x.x [BACKUP_SSH=12345] /root/wg-proxy/init.sh
+```
 
 Setting the BACKUP_SSH variable will open an alternative port for SSH, in case you are worried about looking yourself out of the vps. This needs to be added to sshd config as well.
 
